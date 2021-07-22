@@ -1,15 +1,17 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+app.UseRouting();
+app.UseEndpoints(endpoints =>
 {
-    app.UseDeveloperExceptionPage();
-}
+  endpoints.MapGet("/", () => "Hello Minimal API!");
+  endpoints.MapHealthChecks("/healthcheck");
+  endpoints.MapGet("/person", () => new Person("Bill", "Gates"));
+  endpoints.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
+});
 
-app.MapGet("/", () => "Hello World!");
+await app.RunAsync();
 
-app.Run();
+public record Person(string FirstName, string LastName);
