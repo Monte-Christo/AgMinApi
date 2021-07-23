@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Testing;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace MinApi.Tests
     {
       var response = await _httpClient.GetAsync("/healthcheck");
       response.EnsureSuccessStatusCode();
+      Assert.True(response.Content.Headers.ContentLength > 0);
       Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
     }
 
@@ -48,5 +50,27 @@ namespace MinApi.Tests
       response.EnsureSuccessStatusCode();
       Assert.True(response.Content.Headers.ContentLength > 0);
     }
+
+    [Fact]
+    public async Task SwaggerEndpoints_ReturnOk()
+    {
+      var response = await _httpClient.GetAsync("/swagger/index.html");
+      response.EnsureSuccessStatusCode();
+    }
+
+    [Fact]
+    public async Task QuoteOfTheDay_ReturnsWebQuote()
+    {
+      var response = await _httpClient.GetAsync("/quote");
+
+      response.EnsureSuccessStatusCode();
+      Assert.True(response.Content.Headers.ContentLength > 0);
+
+      var quotes = await response.Content.ReadFromJsonAsync<IList<string>>();
+      Assert.All(quotes, q => Assert.True(IsFunny(q)));
+    }
+
+    private bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
+
   }
 }

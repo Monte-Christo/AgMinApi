@@ -1,17 +1,18 @@
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddHealthChecks();
-
-var app = builder.Build();
-app.UseRouting();
-app.UseEndpoints(endpoints =>
+namespace MinApi
 {
-  endpoints.MapGet("/", () => "Hello Minimal API!");
-  endpoints.MapHealthChecks("/healthcheck");
-  endpoints.MapGet("/person", () => new Person("Bill", "Gates"));
-  endpoints.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
-});
+  public static class Program
+  {
+    public static async Task Main(string[] args)
+    {
+      await CreateHostBuilder(args).Build().RunAsync();
+    }
 
-await app.RunAsync();
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
+      Host.CreateDefaultBuilder(args)
+        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+  }
+}
 
-public record Person(string FirstName, string LastName);
+
+
+
