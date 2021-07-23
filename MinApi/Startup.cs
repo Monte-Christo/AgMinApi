@@ -1,6 +1,4 @@
-﻿using System.Net.Http;
-
-namespace MinApi
+﻿namespace MinApi
 {
   public class Startup
   {
