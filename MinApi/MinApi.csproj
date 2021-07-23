@@ -7,9 +7,6 @@
 
   <ItemGroup>
     <Compile Include=".usings" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
 

@@ -1,10 +1,3 @@
-using Microsoft.AspNetCore.Mvc.Testing;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using Xunit;
-
 namespace MinApi.Tests
 {
   public class ApiTests : IClassFixture<WebApplicationFactory<Startup>>
