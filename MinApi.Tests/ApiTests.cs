@@ -70,6 +70,25 @@ namespace MinApi.Tests
       Assert.All(quotes, q => Assert.True(IsFunny(q)));
     }
 
+    public static IEnumerable<object[]> ValidUrls = new List<object[]>
+    {
+      new object[] { "/" },
+      new object[] { "/healthcheck" },
+      new object[] { "/quote" },
+      new object[] { "/person"},
+      new object[] { "/swagger/index.html"},
+      new object[] { "/swagger/v1/swagger.json" }
+    };
+
+    [Theory]
+    [MemberData(nameof(ValidUrls))]
+    public async Task GetValidUrls_ReturnsCorrectResult(string path)
+    {
+      var response = await _httpClient.GetAsync(path);
+      response.EnsureSuccessStatusCode();
+      Assert.True(response.Content.Headers.ContentLength > 0);
+    }
+
     private bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
 
   }
