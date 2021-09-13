@@ -12,7 +12,3 @@ namespace MinApi
         .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
   }
 }
-
-
-
-
