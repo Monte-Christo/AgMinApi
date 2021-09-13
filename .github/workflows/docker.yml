@@ -11,11 +11,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: DockerHub login
+        env: 
+          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
+          OCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+        run: |
+          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
       - name: Docker build
         run: |
           docker build ./MinApi -t edgarknapp/minapi:1.0.0
