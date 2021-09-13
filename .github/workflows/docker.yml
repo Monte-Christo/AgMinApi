@@ -16,7 +16,7 @@ jobs:
       - name: DockerHub login
         env: 
           DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
-          OCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
           docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
       - name: Docker build
