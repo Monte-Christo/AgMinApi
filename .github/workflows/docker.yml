@@ -18,5 +18,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Docker build
         run: |
-          docker build ./MinApi -t edgarknapp/minapi:1.0.0
+          docker build . -t edgarknapp/minapi:1.0.0
   
