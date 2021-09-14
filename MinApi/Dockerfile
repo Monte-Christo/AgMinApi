@@ -9,8 +9,8 @@ WORKDIR /src
 COPY ["MinApi.csproj", "MinApi/"]
 RUN dotnet restore "MinApi/MinApi.csproj"
 
-COPY . .
 WORKDIR "/src/MinApi"
+COPY . .
 RUN dotnet build "MinApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
