@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minapi-deploy
+  labels:
+    app: minapi-app
+  annotations:
+spec:
+  selector:
+    matchLabels:
+      app: minapi-app
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: minapi-app
+    spec:
+      containers:
+      - name: minapi-app
+        image: edgarknapp/minapi:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"

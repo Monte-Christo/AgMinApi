@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: minapi-service
+  labels:
+    app: minapi-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: minapi-app
+  ports:
+    - protocol: TCP
+      name: http
+      port: 5010
+      targetPort: 80
+   - protocol: TCP
+     name: https
+     port: 5011
+     targetPort: 443
