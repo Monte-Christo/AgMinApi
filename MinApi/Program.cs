@@ -4,7 +4,7 @@ namespace MinApi
   {
     public static async Task Main(string[] args)
     {
-      await CreateHostBuilder(args).Build().RunAsync();
+      await CreateHostBuilder(args).Build().RunAsync("http://localhost:5010");
     }
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
