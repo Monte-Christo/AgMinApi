@@ -20,5 +20,7 @@ app.MapGet("/person", () => new Person("Bill", "Gates"));
 app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
 app.MapGet("/quote", async () => await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
-app.Urls.Add("http://*:5030");
+//app.Urls.Add("http://*:5030");
 await app.RunAsync();
+
+public record Person(string FirstName, string LastName);
