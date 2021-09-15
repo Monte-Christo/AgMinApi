@@ -1,10 +1,10 @@
 namespace MinApi.Tests
 {
-  public class ApiTests : IClassFixture<WebApplicationFactory<Startup>>
+  public class ApiTests : IClassFixture<WebApplicationFactory<Person>>
   {
     private readonly HttpClient _httpClient;
 
-    public ApiTests(WebApplicationFactory<Startup> factory)
+    public ApiTests(WebApplicationFactory<Person> factory)
     {
       _httpClient = factory.CreateDefaultClient();
     }
