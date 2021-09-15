@@ -17,6 +17,9 @@
       app.UseEndpoints(endpoints =>
       {
         endpoints.MapGet("/", () => "Hello Minimal API!");
+        endpoints.MapPost("/", () => "This is a POST");
+        endpoints.MapPut("/", () => "This is a PUT");
+        endpoints.MapDelete("/", () => "This is a DELETE");
         endpoints.MapHealthChecks("/healthcheck");
         endpoints.MapGet("/person", () => new Person("Bill", "Gates"));
         endpoints.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
