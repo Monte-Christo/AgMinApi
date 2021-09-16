@@ -1,10 +1,10 @@
 namespace MinApi.Tests
 {
-  public class ApiTests : IClassFixture<WebApplicationFactory<Person>>
+  public class ApiTests : IClassFixture<WebApplicationFactory<Dummy>>
   {
     private readonly HttpClient _httpClient;
 
-    public ApiTests(WebApplicationFactory<Person> factory)
+    public ApiTests(WebApplicationFactory<Dummy> factory)
     {
       _httpClient = factory.CreateDefaultClient();
     }
@@ -66,7 +66,7 @@ namespace MinApi.Tests
     public static IEnumerable<object[]> ValidUrls = new List<object[]>
     {
       new object[] { "/" },
-      new object[] { "/healthcheck" },
+      new object[] { "/healthcheck"},
       new object[] { "/quote" },
       new object[] { "/person"},
       new object[] { "/swagger/index.html"},
@@ -81,6 +81,63 @@ namespace MinApi.Tests
       response.EnsureSuccessStatusCode();
       Assert.True(response.Content.Headers.ContentLength > 0);
     }
+
+    [Fact]
+    public async Task Get_ReturnsCorrectResult()
+    {
+      var response = await _httpClient.GetAsync("/");
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("Hello Minimal API!", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task Post_ReturnsCorrectReult()
+    {
+      var response = await _httpClient.PostAsync("/", JsonContent.Create(string.Empty));
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("This is a minimal POST", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task Put_ReturnsCorrectReult()
+    {
+      var response = await _httpClient.PutAsync("/", JsonContent.Create(string.Empty));
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("This is a minimal PUT", await response.Content.ReadAsStringAsync());
+    }
+
+
+    [Fact]
+    public async Task Delete_ReturnsCorrectReult()
+    {
+      var response = await _httpClient.DeleteAsync("/");
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("This is a minimal DELETE", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task GetHealth_ReturnsCorrectResult()
+    {
+      var response = await _httpClient.GetAsync("/healthcheck");
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task PostPerson_ReturnsCorrectReult()
+    {
+      var p = new Person("Albert", "Einstein"); 
+      var response = await _httpClient.PostAsync("/person", JsonContent.Create(p));
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal($"Welcome, {p.FirstName} {p.LastName}!", await response.Content.ReadAsStringAsync());
+    }
+
 
     private bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
 

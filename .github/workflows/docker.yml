@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Run tests
+        run: |
+          dotnet test
       - name: Docker build
         run: |
           docker build . -f MinApi/Dockerfile -t edgarknapp/minapi:1.0.0
