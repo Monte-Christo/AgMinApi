@@ -25,8 +25,8 @@ spec:
         image: edgarknapp/minapi:1.0.0
         imagePullPolicy: Always
         ports:
-        - containerPort: 80
-        - containerPort: 443
+        - containerPort: 5010
+        - containerPort: 5011
         resources:
           requests:
             memory: "128Mi"
