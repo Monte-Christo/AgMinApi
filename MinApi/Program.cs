@@ -18,7 +18,7 @@ app.MapHealthChecks("/healthcheck");
 app.MapSwagger();
 app.MapGet("/person", () => new Person("Bill", "Gates"));
 app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
-app.MapGet("/quote", async () => $"Funny quote of the day: {await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes")}");
+app.MapGet("/quote", async () => await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
 await app.RunAsync();
 
