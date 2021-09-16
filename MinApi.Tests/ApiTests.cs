@@ -10,14 +10,6 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task RootPath_ReturnsCorrectResult()
-    {
-      var response = await _httpClient.GetAsync("/");
-      response.EnsureSuccessStatusCode();
-      Assert.Equal("Hello Minimal API!", await response.Content.ReadAsStringAsync());
-    }
-
-    [Fact]
     public async Task HealthCheck_ReturnsOK()
     {
       var response = await _httpClient.GetAsync("/healthcheck");
@@ -131,7 +123,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task PostPerson_ReturnsCorrectReult()
     {
-      var p = new Person("Albert", "Einstein"); 
+      var p = new Person("Albert", "Einstein");
       var response = await _httpClient.PostAsync("/person", JsonContent.Create(p));
 
       response.EnsureSuccessStatusCode();
