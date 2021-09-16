@@ -13,7 +13,3 @@ spec:
       name: http
       port: 5020
       targetPort: 80
-    - protocol: TCP
-      name: https
-      port: 5021
-      targetPort: 443
