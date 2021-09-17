@@ -9,8 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinApi.Tests", "MinApi.Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{92828D30-3738-4103-AB8C-7BC641014D97}"
 	ProjectSection(SolutionItems) = preProject
-		deployment.yaml = deployment.yaml
-		service.yaml = service.yaml
+		Kubernetes\deployment.yaml = Kubernetes\deployment.yaml
+		Kubernetes\service.yaml = Kubernetes\service.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Actions", "Github Actions", "{60968EF3-887E-4235-9A3B-D9700A2F7A37}"
