@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: minapi-app
-        image: edgarknapp/minapi:1.0.1
+        image: edgarknapp/minapi:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 5010

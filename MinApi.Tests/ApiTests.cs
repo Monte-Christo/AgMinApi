@@ -14,7 +14,6 @@ namespace MinApi.Tests
     {
       var response = await _httpClient.GetAsync("/healthcheck");
       response.EnsureSuccessStatusCode();
-      Assert.True(response.Content.Headers.ContentLength > 0);
       Assert.Equal("Healthy", await response.Content.ReadAsStringAsync());
     }
 
@@ -22,9 +21,10 @@ namespace MinApi.Tests
     public async Task GetPerson_ReturnsPerson()
     {
       var response = await _httpClient.GetAsync("/person");
+      var p = new Person("Edgar", "Knapp, Jr.");
 
       response.EnsureSuccessStatusCode();
-      Assert.True(response.Content.Headers.ContentLength > 0);
+      Assert.Equal(p, await response.Content.ReadFromJsonAsync<Person>());
     }
 
     [Fact]
