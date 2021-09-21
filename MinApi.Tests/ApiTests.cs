@@ -2,6 +2,9 @@ namespace MinApi.Tests
 {
   public class ApiTests : IClassFixture<WebApplicationFactory<Dummy>>
   {
+    private const string HelloRoute = "/hello";
+    private const string PersonRoute = "/person";
+
     private readonly HttpClient _httpClient;
 
     public ApiTests(WebApplicationFactory<Dummy> factory)
@@ -20,7 +23,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task GetPerson_ReturnsPerson()
     {
-      var response = await _httpClient.GetAsync("/person");
+      var response = await _httpClient.GetAsync(PersonRoute);
       var p = new Person("Edgar", "Knapp, Jr.");
 
       response.EnsureSuccessStatusCode();
@@ -30,7 +33,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task PostPerson_ReturnsAck()
     {
-      var response = await _httpClient.PostAsync("/person", JsonContent.Create(new Person("Don", "Knuth")));
+      var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(new Person("Don", "Knuth")));
 
       response.EnsureSuccessStatusCode();
       Assert.True(response.Content.Headers.ContentLength > 0);
@@ -57,10 +60,10 @@ namespace MinApi.Tests
 
     public static IEnumerable<object[]> ValidUrls = new List<object[]>
     {
-      new object[] { "/" },
+      new object[] { HelloRoute },
       new object[] { "/healthcheck"},
       new object[] { "/quote" },
-      new object[] { "/person"},
+      new object[] { PersonRoute},
       new object[] { "/swagger/index.html"},
       new object[] { "/swagger/v1/swagger.json" }
     };
@@ -75,9 +78,18 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task Get_ReturnsCorrectResult()
+    public async Task GetRoot_ReturnsCorrectResult()
     {
       var response = await _httpClient.GetAsync("/");
+
+      response.EnsureSuccessStatusCode();
+      Assert.Equal("The link to the hello route is /hello", await response.Content.ReadAsStringAsync());
+    }
+
+    [Fact]
+    public async Task Get_ReturnsCorrectResult()
+    {
+      var response = await _httpClient.GetAsync(HelloRoute);
 
       response.EnsureSuccessStatusCode();
       Assert.Equal("Welcome to this Minimal API!", await response.Content.ReadAsStringAsync());
@@ -86,7 +98,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task Post_ReturnsCorrectReult()
     {
-      var response = await _httpClient.PostAsync("/", JsonContent.Create(string.Empty));
+      var response = await _httpClient.PostAsync(HelloRoute, JsonContent.Create(string.Empty));
 
       response.EnsureSuccessStatusCode();
       Assert.Equal("This is a minimal POST", await response.Content.ReadAsStringAsync());
@@ -95,7 +107,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task Put_ReturnsCorrectReult()
     {
-      var response = await _httpClient.PutAsync("/", JsonContent.Create(string.Empty));
+      var response = await _httpClient.PutAsync(HelloRoute, JsonContent.Create(string.Empty));
 
       response.EnsureSuccessStatusCode();
       Assert.Equal("This is a minimal PUT", await response.Content.ReadAsStringAsync());
@@ -105,7 +117,7 @@ namespace MinApi.Tests
     [Fact]
     public async Task Delete_ReturnsCorrectReult()
     {
-      var response = await _httpClient.DeleteAsync("/");
+      var response = await _httpClient.DeleteAsync(HelloRoute);
 
       response.EnsureSuccessStatusCode();
       Assert.Equal("This is a minimal DELETE", await response.Content.ReadAsStringAsync());
@@ -124,7 +136,7 @@ namespace MinApi.Tests
     public async Task PostPerson_ReturnsCorrectReult()
     {
       var p = new Person("Albert", "Einstein");
-      var response = await _httpClient.PostAsync("/person", JsonContent.Create(p));
+      var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(p));
 
       response.EnsureSuccessStatusCode();
       Assert.Equal($"Welcome, {p.FirstName} {p.LastName}!", await response.Content.ReadAsStringAsync());
