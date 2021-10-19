@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>preview</LangVersion>
     <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MinApi\MinApi.csproj" />
-    <Compile Include=".usings" />
   </ItemGroup>
 
 </Project>

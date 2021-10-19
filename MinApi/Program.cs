@@ -10,7 +10,7 @@ app.UseRouting();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.MapGet("/hello", Hi);
+app.MapGet("/hello", Hi).WithName(nameof(Hi));
 app.MapGet("/", (LinkGenerator linker) => $"The link to the hello route is {linker.GetPathByName(nameof(Hi), values: null)}");
 app.MapPost("/hello", () => "This is a minimal POST");
 app.MapPut("/hello", () => "This is a minimal PUT");
@@ -26,5 +26,3 @@ app.MapSwagger();
 await app.RunAsync();
 
 string Hi() => "Welcome to this Minimal API!";
-
-public record Person(string FirstName, string LastName);

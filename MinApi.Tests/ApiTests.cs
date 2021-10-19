@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc.Testing;
+using Xunit;
+
 namespace MinApi.Tests
 {
   public class ApiTests : IClassFixture<WebApplicationFactory<Dummy>>
@@ -87,7 +90,7 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task Get_ReturnsCorrectResult()
+    public async Task GetHello_ReturnsCorrectResult()
     {
       var response = await _httpClient.GetAsync(HelloRoute);
 
@@ -96,7 +99,7 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task Post_ReturnsCorrectReult()
+    public async Task PostHello_ReturnsCorrectReult()
     {
       var response = await _httpClient.PostAsync(HelloRoute, JsonContent.Create(string.Empty));
 
@@ -105,7 +108,7 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task Put_ReturnsCorrectReult()
+    public async Task PutHello_ReturnsCorrectReult()
     {
       var response = await _httpClient.PutAsync(HelloRoute, JsonContent.Create(string.Empty));
 
@@ -115,7 +118,7 @@ namespace MinApi.Tests
 
 
     [Fact]
-    public async Task Delete_ReturnsCorrectReult()
+    public async Task DeleteHello_ReturnsCorrectReult()
     {
       var response = await _httpClient.DeleteAsync(HelloRoute);
 
