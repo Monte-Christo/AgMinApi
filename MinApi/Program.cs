@@ -11,7 +11,7 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapGet("/hello", Hi).WithName(nameof(Hi));
-app.MapGet("/", (LinkGenerator linker) => $"The link to the hello route is {linker.GetPathByName(nameof(Hi), values: null)}");
+app.MapGet("/", (LinkGenerator linker) => $"The root route is {linker.GetPathByName(nameof(Hi), values: null)}");
 app.MapPost("/hello", () => "This is a minimal POST");
 app.MapPut("/hello", () => "This is a minimal PUT");
 app.MapDelete("/hello", () => "This is a minimal DELETE");

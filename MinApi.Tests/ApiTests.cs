@@ -86,7 +86,7 @@ namespace MinApi.Tests
       var response = await _httpClient.GetAsync("/");
 
       response.EnsureSuccessStatusCode();
-      Assert.Equal("The link to the hello route is /hello", await response.Content.ReadAsStringAsync());
+      Assert.Equal("The root route is /hello", await response.Content.ReadAsStringAsync());
     }
 
     [Fact]
