@@ -27,7 +27,7 @@ namespace MinApi.Tests
     public async Task GetPerson_ReturnsPerson()
     {
       var response = await _httpClient.GetAsync(PersonRoute);
-      var p = new Person("Edgar", "Knapp, Jr.");
+      var p = new Person("Edgar", "Knapp");
 
       response.EnsureSuccessStatusCode();
       Assert.Equal(p, await response.Content.ReadFromJsonAsync<Person>());
