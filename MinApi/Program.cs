@@ -16,7 +16,7 @@ app.MapPost("/hello", () => "This is a minimal POST");
 app.MapPut("/hello", () => "This is a minimal PUT");
 app.MapDelete("/hello", () => "This is a minimal DELETE");
 
-app.MapGet("/person", () => new Person("Edgar", "Knapp, Jr."));
+app.MapGet("/person", () => new Person("Edgar", "Knapp"));
 app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
 app.MapGet("/quote", async () => await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
