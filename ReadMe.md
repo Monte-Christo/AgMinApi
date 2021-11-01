@@ -1,8 +1,7 @@
-To update the deployed version (for instance with ArgoCD, change
+To update the deployed version (for instance with ArgoCD), change image tag in
 
 - docker.yml
 - deployment.yaml
-
 
 To access the ArgoCD dashboard, map the port:
 
