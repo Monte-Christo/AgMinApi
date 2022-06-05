@@ -13,13 +13,13 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-          include-prerelease: true
+          include-prerelease: false
       - name: Run tests
         run: |
           dotnet test
       - name: Docker build
         run: |
-          docker build . -f MinApi/Dockerfile -t edgarknapp/minapi:1.0.5
+          docker build . -f MinApi/Dockerfile -t edgarknapp/minapi:1.0.6
       - name: DockerHub login
         env: 
           DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}

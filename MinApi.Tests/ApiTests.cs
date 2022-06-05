@@ -95,7 +95,7 @@ namespace MinApi.Tests
       var response = await _httpClient.GetAsync(HelloRoute);
 
       response.EnsureSuccessStatusCode();
-      Assert.Equal("Welcome to this Minimal API!", await response.Content.ReadAsStringAsync());
+      Assert.Equal("Welcome to EK's Minimal API!", await response.Content.ReadAsStringAsync());
     }
 
     [Fact]
