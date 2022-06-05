@@ -1,6 +1,6 @@
 name: Docker Build CI
 env:
-  IMAGE_TAG: 1.0.$GITHUB_RUN_NUMBER
+  IMAGE_TAG: '1.0.$GITHUB_RUN_NUMBER'
 on:
   push:
     branches: [ master ]
@@ -16,8 +16,6 @@ jobs:
         with:
           dotnet-version: '6.0.x'
           include-prerelease: false
-      - name: Print env
-        run: env
       - name: Run tests
         run: |
           dotnet test
