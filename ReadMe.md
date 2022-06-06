@@ -19,3 +19,6 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 az group create --name myContainerRegRG --location centralus
 
 az deployment group create --resource-group myContainerRegRG --template-file aca.bicep --parameters acrName={your-unique-name}
+
+See also:
+https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.app/container-app-azurevote
