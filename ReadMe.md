@@ -14,3 +14,8 @@ To access the ArgoCD dashboard, map the port:
 ```PowerShell
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
+## deploy ACR
+
+az group create --name myContainerRegRG --location centralus
+
+az deployment group create --resource-group myContainerRegRG --template-file aca.bicep --parameters acrName={your-unique-name}
