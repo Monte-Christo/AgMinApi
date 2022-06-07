@@ -3,14 +3,14 @@ using Xunit;
 
 namespace MinApi.Tests
 {
-  public class ApiTests : IClassFixture<WebApplicationFactory<Dummy>>
+  public class ApiTests : IClassFixture<WebApplicationFactory<DummyNeededForTestHost>>
   {
     private const string HelloRoute = "/hello";
     private const string PersonRoute = "/person";
 
     private readonly HttpClient _httpClient;
 
-    public ApiTests(WebApplicationFactory<Dummy> factory)
+    public ApiTests(WebApplicationFactory<DummyNeededForTestHost> factory)
     {
       _httpClient = factory.CreateDefaultClient();
     }
@@ -95,7 +95,7 @@ namespace MinApi.Tests
       var response = await _httpClient.GetAsync(HelloRoute);
 
       response.EnsureSuccessStatusCode();
-      Assert.Equal("Welcome to EK's Minimal API!", await response.Content.ReadAsStringAsync());
+      Assert.Equal("Welcome to EK's Minimal API implementation!", await response.Content.ReadAsStringAsync());
     }
 
     [Fact]
