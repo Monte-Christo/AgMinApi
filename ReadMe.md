@@ -14,7 +14,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 
 az group create --name EKContainerRegRG --location westeurope
 
-az deployment group create --resource-group EKContainerRegRG --template-file acr.bicep --parameters acrName=ekcontainerreg
+az deployment group create --resource-group EKContainerRegRG --template-file ./.bicep/acr.bicep --parameters acrName=ekcontainerreg
 
 See also:
 https://github.com/Azure/azure-quickstart-templates/tree/master/quickstarts/microsoft.app/container-app-azurevote
