@@ -27,7 +27,8 @@ jobs:
           DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         run: |
-          docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
+          echo $DOCKERHUB_PASSWORD | docker login -u $DOCKERHUB_USER --password-stdin
+          # docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD
       - name: Docker push
         run: |
           docker push edgarknapp/minapi:${{ env.IMAGE_TAG }}
