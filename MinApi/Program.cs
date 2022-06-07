@@ -25,4 +25,4 @@ app.MapSwagger();
 
 await app.RunAsync();
 
-string Hi() => "Welcome to EK's Minimal API!";
+string Hi() => "Welcome to EK's Minimal API implementation!";

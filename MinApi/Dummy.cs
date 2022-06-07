@@ -1,6 +1,6 @@
-﻿namespace MinApi
-{
-  public class Dummy
-  {
-  }
-}
+﻿// namespace MinApi
+// {
+//   public class Dummy
+//   {
+//   }
+// }
