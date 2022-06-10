@@ -95,11 +95,11 @@ namespace MinApi.Tests
       var response = await _httpClient.GetAsync(HelloRoute);
 
       response.EnsureSuccessStatusCode();
-      Assert.Equal("Welcome to EK's Minimal API implementation!", await response.Content.ReadAsStringAsync());
+      Assert.Equal("Welcome to my Minimal API implementation!", await response.Content.ReadAsStringAsync());
     }
 
     [Fact]
-    public async Task PostHello_ReturnsCorrectReult()
+    public async Task PostHello_ReturnsCorrectResult()
     {
       var response = await _httpClient.PostAsync(HelloRoute, JsonContent.Create(string.Empty));
 
@@ -108,7 +108,7 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task PutHello_ReturnsCorrectReult()
+    public async Task PutHello_ReturnsCorrectResult()
     {
       var response = await _httpClient.PutAsync(HelloRoute, JsonContent.Create(string.Empty));
 
@@ -118,7 +118,7 @@ namespace MinApi.Tests
 
 
     [Fact]
-    public async Task DeleteHello_ReturnsCorrectReult()
+    public async Task DeleteHello_ReturnsCorrectResult()
     {
       var response = await _httpClient.DeleteAsync(HelloRoute);
 
@@ -136,7 +136,7 @@ namespace MinApi.Tests
     }
 
     [Fact]
-    public async Task PostPerson_ReturnsCorrectReult()
+    public async Task PostPerson_ReturnsCorrectResult()
     {
       var p = new Person("Albert", "Einstein");
       var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(p));
