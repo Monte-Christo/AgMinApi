@@ -7,7 +7,7 @@ param acrName string = 'acr${uniqueString(resourceGroup().id)}'
 param location string = resourceGroup().location
 
 @description('Provide a tier of your Azure Container Registry.')
-param acrSku string = 'Basic'
+param acrSku string = 'Standard'
 
 resource acrResource 'Microsoft.ContainerRegistry/registries@2021-06-01-preview' = {
   name: acrName
