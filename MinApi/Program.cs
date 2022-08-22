@@ -26,3 +26,5 @@ app.MapSwagger();
 await app.RunAsync();
 
 string Hi() => "Welcome to my Minimal API implementation!";
+
+public partial class Program { }

@@ -3,14 +3,14 @@ using Xunit;
 
 namespace MinApi.Tests
 {
-  public class ApiTests : IClassFixture<WebApplicationFactory<DummyNeededForTestHost>>
+  public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
   {
     private const string HelloRoute = "/hello";
     private const string PersonRoute = "/person";
 
     private readonly HttpClient _httpClient;
 
-    public ApiTests(WebApplicationFactory<DummyNeededForTestHost> factory)
+    public ApiTests(WebApplicationFactory<Program> factory)
     {
       _httpClient = factory.CreateDefaultClient();
     }
