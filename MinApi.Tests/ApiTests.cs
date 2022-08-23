@@ -57,11 +57,11 @@ namespace MinApi.Tests
       response.EnsureSuccessStatusCode();
       Assert.True(response.Content.Headers.ContentLength > 0);
 
-      var quotes = await response.Content.ReadFromJsonAsync<IList<string>>();
+      var quotes = await response.Content.ReadFromJsonAsync<IList<string>>() ?? new List<string>();
       Assert.All(quotes, q => Assert.True(IsFunny(q)));
     }
 
-    public static IEnumerable<object[]> ValidUrls = new List<object[]>
+    public static readonly IEnumerable<object[]> ValidUrls = new List<object[]>
     {
       new object[] { HelloRoute },
       new object[] { "/healthcheck"},
@@ -146,7 +146,7 @@ namespace MinApi.Tests
     }
 
 
-    private bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
+    private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
 
   }
 }
