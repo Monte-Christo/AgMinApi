@@ -1,3 +1,5 @@
+using MinApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks();
@@ -25,6 +27,9 @@ app.MapSwagger();
 
 await app.RunAsync();
 
-string Hi() => "Welcome to my Minimal API implementation!";
+static string Hi() => "Welcome to my Minimal API implementation!";
 
-public partial class Program { }
+namespace MinApi
+{
+    public partial class Program { }
+}
