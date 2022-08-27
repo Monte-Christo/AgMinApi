@@ -147,6 +147,5 @@ namespace MinApi.Tests
 
 
     private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
-
   }
 }
