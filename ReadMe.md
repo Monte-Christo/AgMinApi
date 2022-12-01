@@ -10,7 +10,7 @@ To access the ArgoCD dashboard, map the port:
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-## deploy ACR
+## Deploy ACR
 
 az group create --name EKContainerRegRG --location westeurope
 
