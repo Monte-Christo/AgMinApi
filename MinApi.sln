@@ -13,11 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 		Kubernetes\service.yaml = Kubernetes\service.yaml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Actions", "Github Actions", "{60968EF3-887E-4235-9A3B-D9700A2F7A37}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\docker.yml = .github\workflows\docker.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CC382DF-086F-4C62-841F-D2E25488A231}"
 	ProjectSection(SolutionItems) = preProject
 		ReadMe.md = ReadMe.md
