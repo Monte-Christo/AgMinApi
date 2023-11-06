@@ -1,5 +1,12 @@
 ﻿namespace MinApi;
 
-#pragma warning disable SYSLIB1037
-public record Person(string FirstName, string LastName);
-#pragma warning restore SYSLIB1037
+public record Person(string FirstName, string LastName, DateTime BirthDate)
+{
+  public string BirthdayCheck(TimeProvider tp)
+  {
+    var month = tp.GetUtcNow().Month;
+    var day = tp.GetUtcNow().Day;
+    var yesOrNo = month == BirthDate.Month && day == BirthDate.Day ? String.Empty : "not ";
+    return $" Today is {yesOrNo}your birthday";
+  }
+}

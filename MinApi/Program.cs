@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHealthChecks();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSingleton(TimeProvider.System);
 
 var app = builder.Build();
 
@@ -18,18 +19,18 @@ app.MapPost("/hello", () => "This is a minimal POST");
 app.MapPut("/hello", () => "This is a minimal PUT");
 app.MapDelete("/hello", () => "This is a minimal DELETE");
 
-app.MapGet("/person", () => new Person("Edgar", "Knapp"));
-app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!");
-app.MapGet("/quote", async () => await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
+app.MapGet("/person", () => new Person("Edgar", "Knapp", new DateTime(1959, 06, 21)));
+app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!{p.BirthdayCheck(TimeProvider.System)}");
+app.MapGet("/quote", () => new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
 app.MapHealthChecks("/healthcheck");
 app.MapSwagger();
 
-await app.RunAsync();
+await app.RunAsync().ConfigureAwait(false);
 
 static string Hi() => "Welcome to my Minimal API implementation!";
 
 namespace MinApi
 {
-    public partial class Program { }
+    public class Program { }
 }
