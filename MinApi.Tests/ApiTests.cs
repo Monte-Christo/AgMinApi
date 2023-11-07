@@ -4,17 +4,12 @@ using Xunit;
 
 namespace MinApi.Tests;
 
-public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
+public class ApiTests(WebApplicationFactory<Program> factory) : IClassFixture<WebApplicationFactory<Program>>
 {
   private const string HelloRoute = "/hello";
   private const string PersonRoute = "/person";
 
-  private readonly HttpClient _httpClient;
-
-  public ApiTests(WebApplicationFactory<Program> factory)
-  {
-    _httpClient = factory.CreateDefaultClient();
-  }
+  private readonly HttpClient _httpClient = factory.CreateDefaultClient();
 
   [Fact]
   public async Task HealthCheck_ReturnsOK()
@@ -140,13 +135,14 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
     var timeProviderMock = new Mock<TimeProvider>();
     timeProviderMock.Setup(tp => tp.GetUtcNow()).Returns(new DateTime(2023, 11, 6));
     var bds = new BirthDayService(timeProviderMock.Object);
+    var check = bds.BirthdayCheck(DateTime.Parse("November 6, 1950"));
 
     var person = new Person("Albert", "Einstein", DateTime.Parse("November 6, 1950"));
     
   var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));
 
     response.EnsureSuccessStatusCode();
-    Assert.Equal($"Welcome, Albert Einstein! Today is not your birthday", await response.Content.ReadAsStringAsync());
+    Assert.Equal($"Welcome, Albert Einstein!{check}", await response.Content.ReadAsStringAsync());
   }
 
   private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
