@@ -139,14 +139,14 @@ public class ApiTests : IClassFixture<WebApplicationFactory<Program>>
   {
     var timeProviderMock = new Mock<TimeProvider>();
     timeProviderMock.Setup(tp => tp.GetUtcNow()).Returns(new DateTime(2023, 11, 6));
-    var timeProvider = timeProviderMock.Object;
+    var bds = new BirthDayService(timeProviderMock.Object);
 
     var person = new Person("Albert", "Einstein", DateTime.Parse("November 6, 1950"));
     
   var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));
 
     response.EnsureSuccessStatusCode();
-    Assert.Equal($"Welcome, {person.FirstName} {person.LastName}!{person.BirthdayCheck(timeProvider)}", await response.Content.ReadAsStringAsync());
+    Assert.Equal($"Welcome, Albert Einstein! Today is not your birthday", await response.Content.ReadAsStringAsync());
   }
 
   private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');

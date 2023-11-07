@@ -6,8 +6,10 @@ builder.Services.AddHealthChecks();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<BirthDayService>();
 
 var app = builder.Build();
+var bds = new BirthDayService(TimeProvider.System);
 
 app.UseRouting();
 app.UseSwagger();
@@ -20,7 +22,7 @@ app.MapPut("/hello", () => "This is a minimal PUT");
 app.MapDelete("/hello", () => "This is a minimal DELETE");
 
 app.MapGet("/person", () => new Person("Edgar", "Knapp", new DateTime(1959, 06, 21)));
-app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!{p.BirthdayCheck(TimeProvider.System)}");
+app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!{bds.BirthdayCheck(p.BirthDate)}");
 app.MapGet("/quote", () => new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
 app.MapHealthChecks("/healthcheck");
@@ -32,5 +34,5 @@ static string Hi() => "Welcome to my Minimal API implementation!";
 
 namespace MinApi
 {
-    public class Program { }
+  public class Program { }
 }
