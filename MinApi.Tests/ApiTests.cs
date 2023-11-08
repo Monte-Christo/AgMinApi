@@ -132,17 +132,19 @@ public class ApiTests(WebApplicationFactory<Program> factory) : IClassFixture<We
   [Fact]
   public async Task PostPerson_ReturnsCorrectResult()
   {
-    var timeProviderMock = new Mock<TimeProvider>();
-    timeProviderMock.Setup(tp => tp.GetUtcNow()).Returns(new DateTime(2023, 11, 7));
-    var bds = new BirthDayService(timeProviderMock.Object);
-    var check = bds.BirthdayCheck(DateTime.Parse("November 6, 1950"));
+    //var timeProviderMock = new Mock<TimeProvider>();
+    //timeProviderMock.Setup(tp => tp.GetUtcNow()).Returns(new DateTime(2023, 11, 7));
+    //var bds = new BirthDayService(timeProviderMock.Object);
+    //var check = bds.BirthdayCheck(DateTime.Parse("November 6, 1950"));
 
-    var person = new Person("Albert", "Einstein", DateTime.Parse("November 6, 1950"));
+    var person = new Person("Albert", "Einstein", DateTime.Parse("November 8, 1950"));
+    var birthdayCheck = DateTime.UtcNow.Month != person.BirthDate.Month || DateTime.UtcNow.Day != person.BirthDate.Day;
+    var not = birthdayCheck ? "not" : string.Empty;
     
   var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));
 
     response.EnsureSuccessStatusCode();
-    Assert.Equal($"Welcome, Albert Einstein!{check}", await response.Content.ReadAsStringAsync());
+    Assert.Equal($"Welcome, Albert Einstein! Today is {not}your birthday", await response.Content.ReadAsStringAsync());
   }
 
   private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
