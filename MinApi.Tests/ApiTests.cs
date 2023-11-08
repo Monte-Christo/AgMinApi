@@ -137,12 +137,12 @@ public class ApiTests(WebApplicationFactory<Program> factory) : IClassFixture<We
 
     var person = new Person("Albert", "Einstein", DateTime.Parse("November 8, 1950"));
     var birthdayCheck = DateTime.UtcNow.Month != person.BirthDate.Month || DateTime.UtcNow.Day != person.BirthDate.Day;
-    var not = birthdayCheck ? "not" : string.Empty;
+    var toBeOrNotToBe = birthdayCheck ? "not" : string.Empty;
     
   var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));
 
     response.EnsureSuccessStatusCode();
-    Assert.Equal($"Welcome, Albert Einstein! Today is {not}your birthday", await response.Content.ReadAsStringAsync());
+    Assert.Equal($"Welcome, Albert Einstein! Today is {toBeOrNotToBe}your birthday", await response.Content.ReadAsStringAsync());
   }
 
   private static bool IsFunny(string s) => s.EndsWith('.') || s.EndsWith('!') || s.EndsWith('?');
