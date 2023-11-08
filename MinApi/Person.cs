@@ -1,12 +1,13 @@
-﻿namespace MinApi;
+﻿using MinApi.Tests;
+
+namespace MinApi;
 
 public record Person(string FirstName, string LastName, DateTime BirthDate)
 {
-  public string BirthdayCheck()
+  public string BirthdayCheck(IDateTimeProvider dateTimeProvider)
   {
-    var month = DateTime.UtcNow.Month;
-    var day = DateTime.UtcNow.Day;
-    var yesOrNo = month == BirthDate.Month && day == BirthDate.Day ? String.Empty : "not ";
+    var today = dateTimeProvider.UtcNow;
+    var yesOrNo = today.Month == BirthDate.Month && today.Day == BirthDate.Day ? String.Empty : "not ";
     return $" Today is {yesOrNo}your birthday";
   }
 }
