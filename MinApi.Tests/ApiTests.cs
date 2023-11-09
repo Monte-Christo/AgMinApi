@@ -137,7 +137,7 @@ public class ApiTests(WebApplicationFactory<Program> factory) : IClassFixture<We
 
     var person = new Person("Albert", "Einstein", DateTime.Parse("November 8, 1950"));
     var birthdayCheck = DateTime.UtcNow.Month != person.BirthDate.Month || DateTime.UtcNow.Day != person.BirthDate.Day;
-    var toBeOrNotToBe = birthdayCheck ? "not" : string.Empty;
+    var toBeOrNotToBe = birthdayCheck ? "not " : string.Empty;
     
   var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));
 
