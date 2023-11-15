@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CC382DF-086F-4C62-841F-D2E25488A231}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\codeql-analysis.yml = .github\workflows\codeql-analysis.yml
 		.github\workflows\codeql.yml = .github\workflows\codeql.yml
 		.github\workflows\docker.yml = .github\workflows\docker.yml
 		ReadMe.md = ReadMe.md
