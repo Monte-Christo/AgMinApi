@@ -60,6 +60,13 @@ jobs:
         # For more details on CodeQL's query packs, refer to: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
         # queries: security-extended,security-and-quality
 
+    - name: Build the thang
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+        include-prerelease: false
+      run: |
+        dotnet build
 
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
@@ -71,14 +78,6 @@ jobs:
 
     #   If the Autobuild fails above, remove it and uncomment the following three lines.
     #   modify them (or add more) to build your code if your project, please refer to the EXAMPLE below for guidance.
-
-    - name Build
-      uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
-          include-prerelease: false
-      run: |
-        dotnet build
 
     # - run: |
     #     echo "Run, Build Application using script"
