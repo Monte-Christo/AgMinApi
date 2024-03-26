@@ -130,11 +130,6 @@ public class ApiTests(WebApplicationFactory<Program> factory) : IClassFixture<We
   [Fact]
   public async Task PostPerson_ReturnsCorrectResult()
   {
-    //var timeProviderMock = new Mock<TimeProvider>();
-    //timeProviderMock.Setup(tp => tp.GetUtcNow()).Returns(new DateTime(2023, 11, 7));
-    //var bds = new BirthDayService(timeProviderMock.Object);
-    //var check = bds.BirthdayCheck(DateTime.Parse("November 6, 1950"));
-
     var person = new Person("Albert", "Einstein", DateTime.Parse("November 8, 1950"));
     var birthdayCheck = DateTime.UtcNow.Month != person.BirthDate.Month || DateTime.UtcNow.Day != person.BirthDate.Day;
     var response = await _httpClient.PostAsync(PersonRoute, JsonContent.Create(person));

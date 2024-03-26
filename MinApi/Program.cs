@@ -1,12 +1,12 @@
 using MinApi;
-using MinApi.Tests;
+//using MinApi.Tests;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHealthChecks();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
+//builder.Services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 
 var app = builder.Build();
 
@@ -22,7 +22,7 @@ app.MapDelete("/hello", () => "This is a minimal DELETE");
 
 app.MapGet("/person", () => new Person("Edgar", "Knapp", new DateTime(1959, 06, 21)));
 app.MapPost("/person", (Person p) => $"Welcome, {p.FirstName} {p.LastName}!{p.BirthdayCheck(new DateTimeProvider())}");
-app.MapGet("/quote", () => new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
+app.MapGet("/quote", async () => await new HttpClient().GetStringAsync("https://ron-swanson-quotes.herokuapp.com/v2/quotes"));
 
 app.MapHealthChecks("/healthcheck");
 app.MapSwagger();
