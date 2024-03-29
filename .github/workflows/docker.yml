@@ -21,7 +21,7 @@ jobs:
       - name: Docker build
         run: |
           docker build . -f MinApi/Dockerfile -t edgarknapp/minapi:${{ env.IMAGE_TAG }}
-      - name: Docker Login (also try docker login -u -p)
+      - name: Docker Login (if unsuccessful, also try "docker login -u -p")
         uses: docker/login-action@v3.1.0
         with:
           username: ${{ secrets.DOCKERHUB_USER }}
